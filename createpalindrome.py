@@ -12,43 +12,112 @@
 # string S consists only of lowercases letters ('a' − 'z') or '?'.
 # In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
 
-import re
-def palindrome(str):
+def solution(str):
     N = len(str)
-
     S = list(str)
+    # print(S)
 
     for i in range(N // 2):
+        # print(i)
         left = S[i]
+        # print(left)
         right = S[N - i - 1]
         # print(right)
-        
-        # print(left)
-        # if both characters are question marks replace them with the same letter
 
+        # check if both of the sides have the question marks
         if left == '?' and right == '?':
             S[i] = 'a'
             S[N - i - 1] = 'a'
-
         elif left == '?':
-            S[i] = right
+            S[i] = S[N - i - 1]
         elif right == '?':
-            S[N - i - 1] = left
+            S[N - i - 1] = S[i]
 
-        elif left != right:
+        elif right != left:
             return "NO"
         
-    #If the string length is odd, we do not need to check the middle charcter 
-    #But if it's a '?', we can replace it with any letter, eg a
+    # THE ODD NUMBER IS SUPPOSSED TO HAVE A MIDDLE VALUE
+    #if the middle value is a question mark we replace it with any letter
 
-    if N % 2 == 1 and S[N // 2] == '?':
-        S[N // 2] = 'a'
+    if  N % 2 == 1 and S[N // 2] == '?':
+        S[N // 2] = 'b'
 
     return ''.join(S)
 
 
 
-print(palindrome("?ab??a"))
-print(palindrome("bab??a"))
-print(palindrome("?a?"))
+
+print(solution("?ab??a"))
+print(solution("bab??a"))
+print(solution("?a?"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import re
+# def palindrome(str):
+#     N = len(str)
+
+#     S = list(str)
+
+#     for i in range(N // 2):
+#         left = S[i]
+#         right = S[N - i - 1]
+#         # print(right)
+        
+#         # print(left)
+#         # if both characters are question marks replace them with the same letter
+
+#         if left == '?' and right == '?':
+#             S[i] = 'a'
+#             S[N - i - 1] = 'a'
+
+#         elif left == '?':
+#             S[i] = right
+#         elif right == '?':
+#             S[N - i - 1] = left
+
+#         elif left != right:
+#             return "NO"
+        
+#     #If the string length is odd, we do not need to check the middle charcter 
+#     #But if it's a '?', we can replace it with any letter, eg a
+
+#     if N % 2 == 1 and S[N // 2] == '?':
+#         S[N // 2] = 'a'
+
+#     return ''.join(S)
+
+
+
+# print(palindrome("?ab??a"))
+# print(palindrome("bab??a"))
+# print(palindrome("?a?"))
 
