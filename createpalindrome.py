@@ -11,45 +11,52 @@
 # N is an integer within the range [1..1,000];
 # string S consists only of lowercases letters ('a' − 'z') or '?'.
 # In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
+import re
+def palindrome(Str):
+    N = len(Str)
+    S = list(Str)
 
-def solution(str):
-    N = len(str)
-    S = list(str)
-    # print(S)
+    if N not in range(1, 1000):
+        return f"{N} should be in the range of 1-1000"
+
+    valid = "^[a-z?]+$"
+    if not re.match(valid, Str):
+        return "the str should only contain lowercase letters and a question mark"
 
     for i in range(N // 2):
         # print(i)
-        left = S[i]
-        # print(left)
-        right = S[N - i - 1]
-        # print(right)
 
-        # check if both of the sides have the question marks
+        left = S[i]
+        right = S[N - i -1]
+        print(right)
+
         if left == '?' and right == '?':
             S[i] = 'a'
-            S[N - i - 1] = 'a'
+            S[N - i -1] = 'a'
         elif left == '?':
-            S[i] = S[N - i - 1]
+            S[i] = S[N - i -1]
         elif right == '?':
-            S[N - i - 1] = S[i]
-
+            S[N - i -1] = S[i]
         elif right != left:
             return "NO"
-        
-    # THE ODD NUMBER IS SUPPOSSED TO HAVE A MIDDLE VALUE
-    #if the middle value is a question mark we replace it with any letter
+    #for the str with odd len 
+    # and the str has a question mark in the middle of the str we change it to a lowercase letter
 
-    if  N % 2 == 1 and S[N // 2] == '?':
-        S[N // 2] = 'b'
+    if N % 2 == 1 and S[N // 2] == "?":
+        S[N // 2] = 'a'
 
     return ''.join(S)
 
 
 
 
-print(solution("?ab??a"))
-print(solution("bab??a"))
-print(solution("?a?"))
+print(palindrome("?ab??a"))
+print(palindrome("bab??a"))
+print(palindrome("?a?"))
+
+
+
+    
 
 
 
@@ -77,6 +84,47 @@ print(solution("?a?"))
 
 
 
+
+
+
+# def solution(str):
+#     N = len(str)
+#     S = list(str)
+#     # print(S)
+
+#     for i in range(N // 2):
+#         # print(i)
+#         left = S[i]
+#         # print(left)
+#         right = S[N - i - 1]
+#         # print(right)
+
+#         # check if both of the sides have the question marks
+#         if left == '?' and right == '?':
+#             S[i] = 'a'
+#             S[N - i - 1] = 'a'
+#         elif left == '?':
+#             S[i] = S[N - i - 1]
+#         elif right == '?':
+#             S[N - i - 1] = S[i]
+
+#         elif right != left:
+#             return "NO"
+        
+#     # THE ODD NUMBER IS SUPPOSSED TO HAVE A MIDDLE VALUE
+#     #if the middle value is a question mark we replace it with any letter
+
+#     if  N % 2 == 1 and S[N // 2] == '?':
+#         S[N // 2] = 'b'
+
+#     return ''.join(S)
+
+
+
+
+# print(solution("?ab??a"))
+# print(solution("bab??a"))
+# print(solution("?a?"))
 
 
 
