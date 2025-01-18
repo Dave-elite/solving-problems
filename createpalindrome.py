@@ -45,7 +45,7 @@ def palindrome(Str):
     if N % 2 == 1 and S[N // 2] == "?":
         S[N // 2] = 'a'
 
-    return ''.join(S)
+    return ''.join(S) #KION THE 
 
 
 
