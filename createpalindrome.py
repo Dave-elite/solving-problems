@@ -39,6 +39,7 @@ def palindrome(Str):
             S[N - i -1] = S[i]
         elif right != left:
             return "NO"
+            #DONE
     #for the str with odd len 
     # and the str has a question mark in the middle of the str we change it to a lowercase letter
 
