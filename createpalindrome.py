@@ -12,52 +12,49 @@
 # string S consists only of lowercases letters ('a' − 'z') or '?'.
 # In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
 import re
-def palindrome(Str):
+def solution(Str):
     N = len(Str)
     S = list(Str)
 
     if N not in range(1, 1000):
         return f"{N} should be in the range of 1-1000"
-
-    valid = "^[a-z?]+$"
+    valid = r'^[a-z?]+$'
     if not re.match(valid, Str):
-        return "the str should only contain lowercase letters and a question mark"
-
+        return f"{N} should only contain lowercase letters and question marks"
+    
     for i in range(N // 2):
         # print(i)
-
         left = S[i]
-        right = S[N - i -1]
-        print(right)
+        right = S[N - i - 1]
 
         if left == '?' and right == '?':
             S[i] = 'a'
-            S[N - i -1] = 'a'
+            S[N - i - 1] = 'a'
+
         elif left == '?':
-            S[i] = S[N - i -1]
+            S[i] = S[N - i - 1]
+
         elif right == '?':
-            S[N - i -1] = S[i]
+            S[N - i - 1] = S[i]
+
         elif right != left:
-            return "NO"
-            #DONE
-    #for the str with odd len 
-    # and the str has a question mark in the middle of the str we change it to a lowercase letter
+            return 'NO'
+        
+    #sort the character in the middel for the string with odd length 
+    if N % 2 == 1 and S[N // 2] == '?':
+        S[N // 2] = 'b'
 
-    if N % 2 == 1 and S[N // 2] == "?":
-        S[N // 2] = 'a'
-
-    return ''.join(S)  
+    return ''.join(S)
 
 
 
 
-print(palindrome("?ab??a"))
-print(palindrome("bab??a"))
-print(palindrome("?a?"))
 
 
 
-    
+print(solution("?ab??a"))
+print(solution("bab??a"))
+print(solution("?a?"))
 
 
 
@@ -86,6 +83,72 @@ print(palindrome("?a?"))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import re
+# def palindrome(Str):
+#     N = len(Str)
+#     S = list(Str)
+
+#     if N not in range(1, 1000):
+#         return f"{N} should be in the range of 1-1000"
+
+#     valid = "^[a-z?]+$"
+#     if not re.match(valid, Str):
+#         return "the str should only contain lowercase letters and a question mark"
+
+#     for i in range(N // 2):
+#         # print(i)
+
+#         left = S[i]
+#         right = S[N - i -1]
+#         print(right)
+
+#         if left == '?' and right == '?':
+#             S[i] = 'a'
+#             S[N - i -1] = 'a'
+#         elif left == '?':
+#             S[i] = S[N - i -1]
+#         elif right == '?':
+#             S[N - i -1] = S[i]
+#         elif right != left:
+#             return "NO"
+#             #DONE
+#     #for the str with odd len 
+#     # and the str has a question mark in the middle of the str we change it to a lowercase letter
+
+#     if N % 2 == 1 and S[N // 2] == "?":
+#         S[N // 2] = 'a'
+
+#     return ''.join(S)  
+
+
+
+
+# print(palindrome("?ab??a"))
+# print(palindrome("bab??a"))
+# print(palindrome("?a?"))
 
 
 # def solution(str):
