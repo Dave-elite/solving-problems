@@ -12,40 +12,77 @@
 # N is an integer within the range [1..100,000];
 # each element of array A is an integer within the range [1..100,000].
 
-
-
 def solution(A):
-    N =len(A)
+    N = len(A)
     if N not in range(1, 100001):
-        return f"{N} should be in the range of 1 - 100,000"
+        return f"{N} should be in the range of 1-100,000"
 
     for i in A:
         if i not in range(1, 100001):
-            return f"{i} should be in the range of 1 - 100,000"
+            return f"{i} should be in the range of 1-100,000"
 
-        '''
-        lamba is an anonymous function that is used when wants a function to be used in a short period of time 
-        lambda x represents each element in the list element and x[1] means we are looking at the second element since the value after enumaration is the second element
-        '''
-
+        #sort the array
         sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
+        
 
-        #initializes an empty list rooms which is intended to keep track of the rooms and their guests placements
+        #define an empty array for rooms
         rooms = []
 
-        #the loop iterates over sorted_guests where each element is a tuple of the index and the value which also repesents the value of the max requirments of the guest in terms of roomates 
-        for guest_idx, maxguests in sorted_guests:
-            placed  = False
+
+        #create a for loop for the sorted guests for its tuples where there is the index and the max guest limit which is charactarized by the value of tuple
+        for guest_index, max_guest in sorted_guests:
+            posted = False
 
             for room in rooms:
                 if len(room) < min(A[k] for k in room):
-                    room.append(guest_idx)
-                    placed = True
+                    room.append(guest_index)
+                    posted = True
                     break
-            if not placed:
-                    rooms.append([guest_idx])
 
+            if not posted:
+                    rooms.append([guest_index])
         return len(rooms)
+
+
+
+
+
+
+
+
+
+# def solution(A):
+#     N =len(A)
+#     if N not in range(1, 100001):
+#         return f"{N} should be in the range of 1 - 100,000"
+
+#     for i in A:
+#         if i not in range(1, 100001):
+#             return f"{i} should be in the range of 1 - 100,000"
+
+#         '''
+#         lamba is an anonymous function that is used when wants a function to be used in a short period of time 
+#         lambda x represents each element in the list element and x[1] means we are looking at the second element since the value after enumaration is the second element
+#         '''
+
+#         sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
+
+#         #initializes an empty list rooms which is intended to keep track of the rooms and their guests placements
+#         rooms = []
+
+#         #the loop iterates over sorted_guests where each element is a tuple of the index and the value which also repesents the value of the max requirments of the guest in terms of roomates 
+#         for guest_idx, maxguests in sorted_guests:
+#             placed  = False
+
+#             for room in rooms:
+#                 if len(room) < min(A[k] for k in room):
+#                     room.append(guest_idx)
+#                     placed = True
+#                     break
+#             if not placed:
+#                     rooms.append([guest_idx])
+
+#         return len(rooms)
 
 
 
