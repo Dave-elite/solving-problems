@@ -13,72 +13,125 @@
 # each element of array A is an integer within the range [1..100,000].
 
 
+
 def solution(A):
-    N = len(A)
-    if N < 1 or N > 100_000:
-        return f"{N} should be in the range of 1-100,000"
-    
-    for i in A: 
+    N =len(A)
+    if N not in range(1, 100001):
+        return f"{N} should be in the range of 1 - 100,000"
+
+    for i in A:
         if i not in range(1, 100001):
-            return f"{i} should be in the range of 1-100,000"
-        ''''sort the guests by their tolerance level (ascending)
-        This makes it easier to process least torelant guests first
-        enumarate() is a built-in Python function that adds a counter (index to an iterable (like a list) and returns an iterator in tuples)
-        in our case A is a list (lets assume it contains the preference of the guests where each number in the list represents a guest tolerance for the maximun number of guests)
-        they can share a room with.
-        For example A = [2,1,4] when you enumarate you get 
-        output: [(0,2), (1, 1), (2,4)]
-        thus enumarate gives us pairs on (index, value) 
-        Sorted(): built in python function that sorts any iterable (like a list ) into a new list.
-        It returns a new list with the elements ordered in a specified way
-        key=lambda x: x[1]
-        the key element allows you to specify a function that will be applied to each element in the list before sorting
-        lambda x: x[1] this is a lambda function which is anonymous (unnamed) function.
-        A lambda function in python is used when you need a simple function for a short period 
-        in this case lambda x: x[1] means 
-                x represents each element in the list 
-                x[1] means we are looking at the second item in each tupke (since enumarate produces tuples of the form (index, value)). 
+            return f"{i} should be in the range of 1 - 100,000"
+
         '''
-        
-        # print(enumerate(A))
+        lamba is an anonymous function that is used when wants a function to be used in a short period of time 
+        lambda x represents each element in the list element and x[1] means we are looking at the second element since the value after enumaration is the second element
+        '''
+
         sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
-        #list will store rooms, where each room is a list of guests indices
+
+        #initializes an empty list rooms which is intended to keep track of the rooms and their guests placements
         rooms = []
-        '''
-            we create an empty list rooms. This will hold the rooms, where each room is represented as list of guest indices
-            for example, after the guest assignment, rooms might look like this
-            rooms = [[1,2], [0]] this means guest 1 and guest 2 are in one room and guest o are in a separate room
-            we loop through the sorted list sorted_guests and attempt to place each guest in a room guest_idx is the index of the current guests,
-            and max_guests is the tolerance of that guest 
-            the places variable is initially set to false indicating that the guest hasn't placed a room yet
 
-            
-            '''
-        for guest_idx, max_guests in sorted_guests:
-            #try to place guest in an existing room
-            placed = False
+        #the loop iterates over sorted_guests where each element is a tuple of the index and the value which also repesents the value of the max requirments of the guest in terms of roomates 
+        for guest_idx, maxguests in sorted_guests:
+            placed  = False
 
-            #check each existing room
-
-            '''
-            inside the loop, we iterate through each room in rooms. we are checking if we can add the current guest to an existing room
-            the condition len(room) < min(A[i] for i in room) checks if the room can accomodate more guests without violating the tolerance of any guests already in the room
-            len(room) gives the current number of guests in the room 
-            min(A[i] for i in room ) finds the smallest tolerance among the guests in the room 
-            this is the maximum number of people that any guests in the room is willing to tolerate
-            if the room can accomodate more guests(the current room size is less than the minimum tolerance ) the current gusts(guest_idx)is added to that toom and placeed set ast true
-            If the guest could not be places in any existing room (placed is still false), a new room is created 
-            and the current guests is places in that room as the first occupant
-            '''
-            
             for room in rooms:
-                if len(room) < min(A[i] for i in room):
+                if len(room) < min(A[k] for k in room):
                     room.append(guest_idx)
                     placed = True
                     break
             if not placed:
-                rooms.append([guest_idx])
+                    rooms.append([guest_idx])
+
         return len(rooms)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A):
+#     N = len(A)
+#     if N < 1 or N > 100_000:
+#         return f"{N} should be in the range of 1-100,000"
+    
+#     for i in A: 
+#         if i not in range(1, 100001):
+#             return f"{i} should be in the range of 1-100,000"
+#         ''''sort the guests by their tolerance level (ascending)
+#         This makes it easier to process least torelant guests first
+#         enumarate() is a built-in Python function that adds a counter (index to an iterable (like a list) and returns an iterator in tuples)
+#         in our case A is a list (lets assume it contains the preference of the guests where each number in the list represents a guest tolerance for the maximun number of guests)
+#         they can share a room with.
+#         For example A = [2,1,4] when you enumarate you get 
+#         output: [(0,2), (1, 1), (2,4)]
+#         thus enumarate gives us pairs on (index, value) 
+#         Sorted(): built in python function that sorts any iterable (like a list ) into a new list.
+#         It returns a new list with the elements ordered in a specified way
+#         key=lambda x: x[1]
+#         the key element allows you to specify a function that will be applied to each element in the list before sorting
+#         lambda x: x[1] this is a lambda function which is anonymous (unnamed) function.
+#         A lambda function in python is used when you need a simple function for a short period 
+#         in this case lambda x: x[1] means 
+#                 x represents each element in the list 
+#                 x[1] means we are looking at the second item in each tupke (since enumarate produces tuples of the form (index, value)). 
+#         '''
+        
+#         # print(enumerate(A))
+#         sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
+#         #list will store rooms, where each room is a list of guests indices
+#         rooms = []
+#         '''
+#             we create an empty list rooms. This will hold the rooms, where each room is represented as list of guest indices
+#             for example, after the guest assignment, rooms might look like this
+#             rooms = [[1,2], [0]] this means guest 1 and guest 2 are in one room and guest o are in a separate room
+#             we loop through the sorted list sorted_guests and attempt to place each guest in a room guest_idx is the index of the current guests,
+#             and max_guests is the tolerance of that guest 
+#             the places variable is initially set to false indicating that the guest hasn't placed a room yet
+
+            
+#             '''
+#         for guest_idx, max_guests in sorted_guests:
+#             #try to place guest in an existing room
+#             placed = False
+
+#             #check each existing room
+
+#             '''
+#             inside the loop, we iterate through each room in rooms. we are checking if we can add the current guest to an existing room
+#             the condition len(room) < min(A[i] for i in room) checks if the room can accomodate more guests without violating the tolerance of any guests already in the room
+#             len(room) gives the current number of guests in the room 
+#             min(A[i] for i in room ) finds the smallest tolerance among the guests in the room 
+#             this is the maximum number of people that any guests in the room is willing to tolerate
+#             if the room can accomodate more guests(the current room size is less than the minimum tolerance ) the current gusts(guest_idx)is added to that toom and placeed set ast true
+#             If the guest could not be places in any existing room (placed is still false), a new room is created 
+#             and the current guests is places in that room as the first occupant
+#             '''
+            
+#             for room in rooms:
+#                 if len(room) < min(A[i] for i in room):
+#                     room.append(guest_idx)
+#                     placed = True
+#                     break
+#             if not placed:
+#                 rooms.append([guest_idx])
+#         return len(rooms)
     
   
 
@@ -113,4 +166,5 @@ def solution(A):
 print(solution([1, 1, 1, 1, 1]))
 print(solution([2, 1, 4]))
 print(solution([2, 7, 2, 9, 8]))
+print(solution([7, 3, 1, 1, 4, 5, 4, 9]))
 
