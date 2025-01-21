@@ -14,37 +14,94 @@
 import re
 def solution(Str):
     N = len(Str)
-    S = list(Str)
-
-    if N not in range(1, 1000):
-        return f"{N} should be in the range of 1-1000"
+    if N not in range(1, 1001):
+        return f"{N} should be in the range of 1-1,000"
     valid = r'^[a-z?]+$'
     if not re.match(valid, Str):
-        return f"{N} should only contain lowercase letters and question marks"
-    
+        return f"{Str} should only contain lowercase letters and question marks"
+
+    S = list(Str)
     for i in range(N // 2):
-        # print(i)
         left = S[i]
         right = S[N - i - 1]
-
+        # print(left)
         if left == '?' and right == '?':
-            S[i] = 'a'
-            S[N - i - 1] = 'a'
-
-        elif left == '?':
-            S[i] = S[N - i - 1]
+            S[i] = 'a' 
+            S[N - i - 1] = 'a' 
 
         elif right == '?':
             S[N - i - 1] = S[i]
+        elif left == '?':
+            S[i] = S[N - i - 1]
 
-        elif right != left:
-            return 'NO'
-        
-    #sort the character in the middel for the string with odd length 
+        elif left != right:
+            return "NO"
+    
     if N % 2 == 1 and S[N // 2] == '?':
-        S[N // 2] = 'b'
+        S[N // 2] == 'b'
+    return''.join(S)
 
-    return ''.join(S)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import re
+# def solution(Str):
+#     N = len(Str)
+#     S = list(Str)
+
+#     if N not in range(1, 1000):
+#         return f"{N} should be in the range of 1-1000"
+#     valid = r'^[a-z?]+$'
+#     if not re.match(valid, Str):
+#         return f"{N} should only contain lowercase letters and question marks"
+    
+#     for i in range(N // 2):
+#         # print(i)
+#         left = S[i]
+#         right = S[N - i - 1]
+
+#         if left == '?' and right == '?':
+#             S[i] = 'a'
+#             S[N - i - 1] = 'a'
+
+#         elif left == '?':
+#             S[i] = S[N - i - 1]
+
+#         elif right == '?':
+#             S[N - i - 1] = S[i]
+
+#         elif right != left:
+#             return 'NO'
+        
+#     #sort the character in the middel for the string with odd length 
+#     if N % 2 == 1 and S[N // 2] == '?':
+#         S[N // 2] = 'b'
+
+#     return ''.join(S)
 
 
 
