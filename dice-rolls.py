@@ -1,0 +1,158 @@
+# You have just rolled a dice several times. The N roll results that you remember are described by an array A.
+#  However, there are F rolls whose results you have forgotten. The arithmetic mean of all of the roll 
+# results (the sum of all the roll results divided by the number of rolls) equals M.
+# What are the possible results of the missing rolls?
+# Write a function:
+# def solution(A, F, M)
+# that, given an array A of length N, an integer F and an integer M, returns an array containing possible results of the missed rolls. The returned array should contain F integers from 1 to 6 (valid dice rolls). If such an array does not exist then the function should return [0].
+# Examples:
+# 1. Given A = [3, 2, 4, 3], F = 2, M = 4, your function should return [6, 6]. The arithmetic mean of all the rolls is (3 + 2 + 4 + 3 + 6 + 6) / 6 = 24 / 6 = 4.
+# 2. Given A = [1, 5, 6], F = 4, M = 3, your function may return [2, 1, 2, 4] or [6, 1, 1, 1] (among others).
+# 3. Given A = [1, 2, 3, 4], F = 4, M = 6, your function should return [0]. It is not possible to obtain such a mean.
+# 4. Given A = [6, 1], F = 1, M = 1, your function should return [0]. It is not possible to obtain such a mean.
+# Write an efficient algorithm for the following assumptions:
+# N and F are integers within the range [1..100,000];
+# each element of array A is an integer within the range [1..6];
+# M is an integer within the range [1..6].
+
+def solution(A, F, M):
+    N = len(A)
+    if N not in range(1, 100001):
+        return f"{N} should be in the range of 1 - 100,000"
+
+    if F not in range(1, 100001):
+        return f"{F} should be in the range of 1 - 100,000"
+
+    if M not in range(1, 7):
+        return f"{M} should be in the range of 1 - 6"
+    for i in A:
+        if i not in range(1, 7):
+            return f"{i} should be in the rangeof 1-6"
+    known_sum = sum(A)
+    total_sum = M * (N + F)
+    forgotten_sum = total_sum - known_sum
+
+    if forgotten_sum < F or forgotten_sum > F * 6:
+        return [0]
+
+    rolls = [1] * F
+    current_sum = F
+    remaining_sum = forgotten_sum - current_sum
+
+    for i in range(F):
+        add = min(5, remaining_sum)
+        rolls[i] += add
+        remaining_sum -= add
+        if remaining_sum == 0:
+            break
+    return rolls if remaining_sum == 0 else [0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A, F, M):
+#     N = len(A)
+#     if N not in range(1, 100001):
+#         return f"{N} should be in the range of 1 - 100,000"
+#     if F not in range(1, 100001):
+#         return f"{F} should be in the range of 1 - 100,000"
+#     if M not in range(1, 7):
+#         return f"{M} should be in the range of 1 - 6"
+#     for i in A:
+#         if i not in range(1, 7):
+#             return f"{i} should be in the range of 1 - 6"
+
+#     '''
+#     known sum is the total value of the values in the array A which represents the sum of the rolls you remember
+#     total sum is the sum of all rolls known and forgotten that would be give you the desired mean M
+#     It is calculated by multiplying the desired mean M by the total number of rolls N (Length of the array) + F(length of the forgotten) and M being the mean = M * (N + F)
+#     With the total sum and the sum of the forgotten sum you are able to remember the total number of the forgotten_sum
+#     which is forgotten_sum = total_sum - known_sum
+#     '''
+#     known_sum = sum(A)
+#     print(known_sum)
+#     total_sum = M * (N + F)
+#     forgotten_sum = total_sum - known_sum
+
+#     '''
+#     each roll must be a number between 1 and 6, inclusive. therefore the sum of the 
+#     forgotten rolls must fall within specific range which is the btw f * 1 and f * 6
+#     '''
+#     if forgotten_sum < F * 1 or forgotten_sum > 6 * F:
+#         return [0]
+
+#     '''
+#     rolls = [1] * F initializes a list called rolls that will hold the values of the forgotten rolls. 
+#     [1] * F creates a list of F elements each initialized to 1
+#     each roll can be between 1 and 6 and we start by assuming the smallest possible value(1) for each forgotten role
+#     example if F = 3 THEN rolls would initially be [1,1,1]
+#     The current sum is the total sum of the forgotten rolls which you've just initialized
+#     since the list rolls contains F elements and each element is initialized to 1, the sum of these elements is simply F
+#     Remaining sum is the difference between forgotten_sum and current_sum, which is the additinal value we need to distribute
+#     across the F forgotten rolls
+#     '''
+#     rolls = [1] * F
+#     current_sum = F
+#     remaining_sum = forgotten_sum - current_sum
+
+#     '''
+#     Distribute the remaining_sum across the F forgotten rolls
+#     for each roll it adds as much as possible but not more than 5(since the roll cannot
+#     exceed 6, and it was already inititialized as 1)
+#     it reduces the remaninng_sum by the amount added, and if the remaining sum becomes zero, it breaks ouf of the 
+#     loop, as no further distribution is needed.
+#     '''
+#     for i in range(F):
+#         '''
+#         the min() function is to ensure you do this by choosing the smaller of 5 and remaining_sum
+#         '''
+#         add = min(5, remaining_sum)
+#         rolls[i] += add
+#         remaining_sum -= add
+
+#         if remaining_sum == 0:
+#             break
+#     return rolls if remaining_sum == 0 else [0]
+        
+
+
+# Example 1
+A = [3, 2, 4, 3]
+F = 2
+M = 4
+print(solution(A, F, M))  # Expected output: [6, 6]
+
+# Example 2
+A = [1, 5, 6]
+F = 4
+M = 3
+print(solution(A, F, M))  # Expected output: Possible outputs like [2, 1, 2, 4] or [6, 1, 1, 1] etc.
+
+# Example 3
+A = [1, 2, 3, 4]
+F = 4
+M = 6
+print(solution(A, F, M))  # Expected output: [0]
+
+# Example 4
+A = [6, 1]
+F = 1
+M = 1
+print(solution(A, F, M))  # Expected output: [0]
