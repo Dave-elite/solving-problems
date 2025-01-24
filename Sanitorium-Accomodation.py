@@ -15,33 +15,101 @@
 def solution(A):
     N = len(A)
     if N not in range(1, 100001):
-        return f"{N} should be in the range of 1-100,000"
-
+        return f"{N} should be in the range of 1 - 100,000"
     for i in A:
         if i not in range(1, 100001):
-            return f"{i} should be in the range of 1-100,000"
+            return f"{i} should be in the range of 1 - 100,000"
+    '''
+    the array A is sorted in ascending order based on the values in A. However, since we need to retain the original indices of guests
+    (since they are important for later placing them in rooms), the enumarate(A) function is used. it produces pairs of (index, value) for each guest,
+    and then it sorts these pairs by the value(maximum number of guests each guests is willing to accomodate) This ensures that guests who are more restictive (want fewer roomates
+    ) are processed first
+    the key argument in the sorted function specifues a function that determines the value to use for sorting
+    Here, lambda x: x[1] is an anonymous function (a lambda function) that takes a tuple x as input and returns x[1] 
+    the second element of the tuple (which is the value from the array A)
+    IN simpler terms, this is telling python to sort the list of tuples based on the second element of each tuple (the value from the original array A)
+    '''
+        
+    sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
 
-        #sort the array
-        sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
+    rooms = []
+   
+
+    for guest_idx, max_guests in sorted_guests:
+        placed = False
+
+        for room in rooms:
+            if len(room) < min(A[k] for k in room):
+                room.append(guest_idx)
+                placed = True
+                break
+        if not placed:
+            rooms.append([guest_idx])
+
+    return len(rooms)
+
         
 
-        #define an empty array for rooms
-        rooms = []
 
 
-        #create a for loop for the sorted guests for its tuples where there is the index and the max guest limit which is charactarized by the value of tuple
-        for guest_index, max_guest in sorted_guests:
-            posted = False
 
-            for room in rooms:
-                if len(room) < min(A[k] for k in room):
-                    room.append(guest_index)
-                    posted = True
-                    break
 
-            if not posted:
-                    rooms.append([guest_index])
-        return len(rooms)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A):
+#     N = len(A)
+#     if N not in range(1, 100001):
+#         return f"{N} should be in the range of 1-100,000"
+
+#     for i in A:
+#         if i not in range(1, 100001):
+#             return f"{i} should be in the range of 1-100,000"
+
+#         #sort the array
+#         sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
+        
+
+#         #define an empty array for rooms
+#         rooms = []
+
+
+#         #create a for loop for the sorted guests for its tuples where there is the index and the max guest limit which is charactarized by the value of tuple
+#         for guest_index, max_guest in sorted_guests:
+#             posted = False
+
+#             for room in rooms:
+#                 if len(room) < min(A[k] for k in room):
+#                     room.append(guest_index)
+#                     posted = True
+#                     break
+
+#             if not posted:
+#                     rooms.append([guest_index])
+#         return len(rooms)
 
 
 
