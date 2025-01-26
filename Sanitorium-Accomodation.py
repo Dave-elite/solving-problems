@@ -15,38 +15,102 @@
 def solution(A):
     N = len(A)
     if N not in range(1, 100001):
-        return f"{N} should be in the range of 1 - 100,000"
+        return f"{N} should be in the range 1- 100,000"
     for i in A:
         if i not in range(1, 100001):
-            return f"{i} should be in the range of 1 - 100,000"
-    '''
-    the array A is sorted in ascending order based on the values in A. However, since we need to retain the original indices of guests
-    (since they are important for later placing them in rooms), the enumarate(A) function is used. it produces pairs of (index, value) for each guest,
-    and then it sorts these pairs by the value(maximum number of guests each guests is willing to accomodate) This ensures that guests who are more restictive (want fewer roomates
-    ) are processed first
-    the key argument in the sorted function specifues a function that determines the value to use for sorting
-    Here, lambda x: x[1] is an anonymous function (a lambda function) that takes a tuple x as input and returns x[1] 
-    the second element of the tuple (which is the value from the array A)
-    IN simpler terms, this is telling python to sort the list of tuples based on the second element of each tuple (the value from the original array A)
+            return f"{i} should be in the range 1 - 100,000"
+        
+    ''''
+    enumarate(A) pairs each guests with their index and room capacity. for example, if A
+    = [3, 1, 2] then enumarate(A) gives [(0, 3), (1, 1)]
+    sorted(..., key=lambda x : x[1]) sorts the list based on the second element of each tuple which is the value insted of using the index
     '''
         
-    sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
+    sorted_guests = sorted(enumerate(A), key=lambda x : x[1])
 
     rooms = []
-   
 
+    print(sorted_guests)
     for guest_idx, max_guests in sorted_guests:
         placed = False
 
         for room in rooms:
-            if len(room) < min(A[k] for k in room):
-                room.append(guest_idx)
-                placed = True
-                break
+         if len(room) < min(A[k] for k in room):
+            room.append(guest_idx)
+            placed = True
         if not placed:
-            rooms.append([guest_idx])
+           rooms.append([guest_idx])
 
     return len(rooms)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A):
+#     N = len(A)
+#     if N not in range(1, 100001):
+#         return f"{N} should be in the range of 1 - 100,000"
+#     for i in A:
+#         if i not in range(1, 100001):
+#             return f"{i} should be in the range of 1 - 100,000"
+#     '''
+#     the array A is sorted in ascending order based on the values in A. However, since we need to retain the original indices of guests
+#     (since they are important for later placing them in rooms), the enumarate(A) function is used. it produces pairs of (index, value) for each guest,
+#     and then it sorts these pairs by the value(maximum number of guests each guests is willing to accomodate) This ensures that guests who are more restictive (want fewer roomates
+#     ) are processed first
+#     the key argument in the sorted function specifues a function that determines the value to use for sorting
+#     Here, lambda x: x[1] is an anonymous function (a lambda function) that takes a tuple x as input and returns x[1] 
+#     the second element of the tuple (which is the value from the array A)
+#     IN simpler terms, this is telling python to sort the list of tuples based on the second element of each tuple (the value from the original array A)
+#     '''
+        
+#     sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
+
+#     rooms = []
+   
+
+#     for guest_idx, max_guests in sorted_guests:
+#         placed = False
+
+#         for room in rooms:
+#             if len(room) < min(A[k] for k in room):
+#                 room.append(guest_idx)
+#                 placed = True
+#                 break
+#         if not placed:
+#             rooms.append([guest_idx])
+
+#     return len(rooms)
 
         
 
