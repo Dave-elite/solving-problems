@@ -16,25 +16,83 @@
 # Write an efficient algorithm for the following assumptions:
 # N is an integer within the range [3..100,000];
 # string S is made only of the characters '.' and/or 'X'.
-
 import re
-def solution(s):
-    patches_repaired = 0
-    S = list(s)
-    N = len(s)
+def solution(S):
+    N = len(S)
+    # S = list(S)
     batches = []
+    patches = 0
     if N not in range(3, 100001):
-        return f"{N} should be in the range of 3 - 100,000"
+        return f"{N} Should be in the range 3 - 100,000"
     valid = r'^[.X]+$'
-    if not re.match(valid, s):
-        return f"{s} should only contain x and . characters"
+    if not re.match(valid, S):
+        return f"{S} should only contain X and . characters"
     for i in range(0, N, 3):
-        batches.append(S[i: i + 3])
+        batches.append(S[i : i + 3])
     for k in batches:
         # print(k)
         if 'X' in k:
-            patches_repaired += 1
-    return patches_repaired
+            patches += 1
+    return patches
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import re
+# def solution(s):
+#     patches_repaired = 0
+#     S = list(s)
+#     N = len(s)
+#     batches = []
+#     if N not in range(3, 100001):
+#         return f"{N} should be in the range of 3 - 100,000"
+#     valid = r'^[.X]+$'
+#     if not re.match(valid, s):
+#         return f"{s} should only contain x and . characters"
+#     for i in range(0, N, 3):
+#         batches.append(S[i: i + 3])
+#     for k in batches:
+#         # print(k)
+#         if 'X' in k:
+#             patches_repaired += 1
+#     return patches_repaired
 
     
 print(solution(".X..X"))
