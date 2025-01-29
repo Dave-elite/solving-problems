@@ -16,49 +16,97 @@
 # M is an integer within the range [1..6].
 
 def solution(A, F, M):
-    N =len(A)
+    N = len(A)
     if N not in range(1, 100001):
-        f"{N} should be in the range of 1 - 100,000"
+        return f"{N}should be in the range 1 - 100,000"
     if F not in range(1, 100001):
-        f"{F} should be in the range of 1 - 100,000"
-    
+        return f"{F} should be in the range of 1 - 100,000"
     if M not in range(1, 7):
-        f"{M} should be in the range of 1 - 6"
+        return f"{M} should be in the range of 1 - 7"
     for i in A:
-        if i not in range(1,7):
-            f"{i} should be in the range of 1- 6"
-
-    known_sum = sum(A)
+        if i not in range(1, 7):
+            return f"{i} should be in the range of 1 - 6"
+        
     total_rolls = M * (N + F)
-    # print(known_sum)
-    forgotten_sum = total_rolls - known_sum
+    known_total = sum(A)
+    # print(known_total)
+    forgortten_sum = total_rolls - known_total
 
-    '''
-    this checks if the sum of the forgotten rolls is possible
-    each forgotten roll must be between 1 and 6
-    the minimum possible sum of the F forgotten rolls is F (if all rolls are 1)
-    the maximum possible sum of F forgotten rolls is F * 6 (if all rolls are 6)
-    if the forgotten sum is less than F and greater than F * 6 It is impossible to achieve the desired mean
-    so return, [0]
-    '''
-    if forgotten_sum < F and forgotten_sum < F * 6:
-        return[0]
+    if forgortten_sum < F and forgortten_sum < F * 6:
+        return [0]
 
-    current_roll = [1] * F
+    
+
+    current_rolls = N * [1]
     current_sum = F
-    # print(current_roll)
-    remaining_sum = forgotten_sum - current_sum
-    # print(current_roll)
-
+    # print(current_rolls)
+    remaining_sum = forgortten_sum - current_sum
+    # print(remaining_sum)
+    
     for i in range(F):
         add = min(5, remaining_sum)
-        # print(add)
-        current_roll[i] += add
+        current_rolls[i] += add
         remaining_sum -= add
         # print(remaining_sum)
         if remaining_sum == 0:
             break
-    return current_roll if remaining_sum == 0 else [0]
+    return current_rolls if remaining_sum == 0 else [0]
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A, F, M):
+#     N =len(A)
+#     if N not in range(1, 100001):
+#         f"{N} should be in the range of 1 - 100,000"
+#     if F not in range(1, 100001):
+#         f"{F} should be in the range of 1 - 100,000"
+    
+#     if M not in range(1, 7):
+#         f"{M} should be in the range of 1 - 6"
+#     for i in A:
+#         if i not in range(1,7):
+#             f"{i} should be in the range of 1- 6"
+
+#     known_sum = sum(A)
+#     total_rolls = M * (N + F)
+#     # print(known_sum)
+#     forgotten_sum = total_rolls - known_sum
+
+#     '''
+#     this checks if the sum of the forgotten rolls is possible
+#     each forgotten roll must be between 1 and 6
+#     the minimum possible sum of the F forgotten rolls is F (if all rolls are 1)
+#     the maximum possible sum of F forgotten rolls is F * 6 (if all rolls are 6)
+#     if the forgotten sum is less than F and greater than F * 6 It is impossible to achieve the desired mean
+#     so return, [0]
+#     '''
+#     if forgotten_sum < F and forgotten_sum < F * 6:
+#         return[0]
+
+#     current_roll = [1] * F
+#     current_sum = F
+#     # print(current_roll)
+#     remaining_sum = forgotten_sum - current_sum
+#     # print(current_roll)
+
+#     for i in range(F):
+#         add = min(5, remaining_sum)
+#         # print(add)
+#         current_roll[i] += add
+#         remaining_sum -= add
+#         # print(remaining_sum)
+#         if remaining_sum == 0:
+#             break
+#     return current_roll if remaining_sum == 0 else [0]
 
     
 
