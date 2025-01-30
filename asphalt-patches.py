@@ -19,21 +19,64 @@
 import re
 def solution(S):
     N = len(S)
-    # S = list(S)
-    batches = []
-    patches = 0
+    S = list(S)
+    group = []
+    count = 0
     if N not in range(3, 100001):
-        return f"{N} Should be in the range 3 - 100,000"
+        return f"{N} should be in the range of 3 - 100,000"
     valid = r'^[.X]+$'
-    if not re.match(valid, S):
-        return f"{S} should only contain X and . characters"
-    for i in range(0, N, 3):
-        batches.append(S[i : i + 3])
-    for k in batches:
+    # if not re.match(valid, S):
+    #     return f"{S} should only contain characters '. and X characters"
+    for u in range(0, N, 3):
+        # print(u)
+        k = S[u: u+3]
         # print(k)
-        if 'X' in k:
-            patches += 1
-    return patches
+        group.append(k)
+    # print(group)
+    for i in group:
+        # print(i)
+        if 'X' in i:
+            count += 1
+    return count
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import re
+# def solution(S):
+#     N = len(S)
+#     # S = list(S)
+#     batches = []
+#     patches = 0
+#     if N not in range(3, 100001):
+#         return f"{N} Should be in the range 3 - 100,000"
+#     valid = r'^[.X]+$'
+#     if not re.match(valid, S):
+#         return f"{S} should only contain X and . characters"
+#     for i in range(0, N, 3):
+#         batches.append(S[i : i + 3])
+#     for k in batches:
+#         # print(k)
+#         if 'X' in k:
+#             patches += 1
+#     return patches
 
 
 
