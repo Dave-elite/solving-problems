@@ -27,6 +27,7 @@
 # Assume that:
 # the length of string S is within the range [3..1,000];
 # the length of string C is within the range [1..100];
+
 # string S consists only of letters (a−z and/or A−Z), spaces, hyphens and commas;
 # string S contains valid names; no name appears more than once;
 # string C is made only of letters (a−z and/or A−Z).
