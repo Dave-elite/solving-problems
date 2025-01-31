@@ -19,14 +19,14 @@
 import re
 def solution(S):
     N = len(S)
-    S = list(S)
+    # S = list(S)
     group = []
     count = 0
     if N not in range(3, 100001):
         return f"{N} should be in the range of 3 - 100,000"
     valid = r'^[.X]+$'
-    # if not re.match(valid, S):
-    #     return f"{S} should only contain characters '. and X characters"
+    if not re.match(valid, S):
+        return f"{S} should only contain characters '. and X characters"
     for u in range(0, N, 3):
         # print(u)
         k = S[u: u+3]

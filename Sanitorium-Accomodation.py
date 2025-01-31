@@ -14,34 +14,77 @@
 
 def solution(A):
     N = len(A)
+    
     if N not in range(1, 100001):
-        return f"{N} should be in the range 1- 100,000"
+        return f'{N} should be in the range of 1 - 100,000'
     for i in A:
         if i not in range(1, 100001):
-            return f"{i} should be in the range 1 - 100,000"
+            return f"{i} should be in the range of 1 - 100,000"
         
-    ''''
-    enumarate(A) pairs each guests with their index and room capacity. for example, if A
-    = [3, 1, 2] then enumarate(A) gives [(0, 3), (1, 1)]
-    sorted(..., key=lambda x : x[1]) sorts the list based on the second element of each tuple which is the value insted of using the index
-    '''
-        
-    sorted_guests = sorted(enumerate(A), key=lambda x : x[1])
-
+    sorted_guests = sorted(enumerate(A), key=lambda x: x[1])
     rooms = []
+    # print(sorted_guests)
 
-    print(sorted_guests)
-    for guest_idx, max_guests in sorted_guests:
+    for guest_indx, max_guests in sorted_guests:
         placed = False
 
         for room in rooms:
-         if len(room) < min(A[k] for k in room):
-            room.append(guest_idx)
-            placed = True
-        if not placed:
-           rooms.append([guest_idx])
-
+            if len(room) < min(A[k] for k in room):
+                rooms.append(guest_indx)
+                placed = True
+            if not placed:
+                rooms.append([guest_indx])
     return len(rooms)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A):
+#     N = len(A)
+#     if N not in range(1, 100001):
+#         return f"{N} should be in the range 1- 100,000"
+#     for i in A:
+#         if i not in range(1, 100001):
+#             return f"{i} should be in the range 1 - 100,000"
+        
+#     ''''
+#     enumarate(A) pairs each guests with their index and room capacity. for example, if A
+#     = [3, 1, 2] then enumarate(A) gives [(0, 3), (1, 1)]
+#     sorted(..., key=lambda x : x[1]) sorts the list based on the second element of each tuple which is the value insted of using the index
+#     '''
+        
+#     sorted_guests = sorted(enumerate(A), key=lambda x : x[1])
+
+#     rooms = []
+
+#     print(sorted_guests)
+#     for guest_idx, max_guests in sorted_guests:
+#         placed = False
+
+#         for room in rooms:
+#          if len(room) < min(A[k] for k in room):
+#             room.append(guest_idx)
+#             placed = True
+#         if not placed:
+#            rooms.append([guest_idx])
+
+#     return len(rooms)
 
 
 
