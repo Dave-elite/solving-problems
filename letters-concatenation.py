@@ -1,5 +1,6 @@
 # Concatenation is an operation that joins strings. For example, the concatenation of strings "smart" and "phone" is "smartphone".
 #  Concatenation can be expanded to more than two strings; for example, concatenating "co", "dil" and "ity" results in "codility".
+
 # Given an array A consisting of strings, your function should calculate the length of the longest string S such that:
 # S is a concatenation of some of the strings from A;
 # every letter in S is different.
