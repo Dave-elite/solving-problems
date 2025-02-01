@@ -15,6 +15,8 @@
 #  as each of them contains repeating letters.
 # 4. Given A = ["eva", "jqw", "tyn", "jan"], your function should return 9. One of the possible strings of this length is "evajqwtyn".
 # Assume that:
+
+
 # N is an integer within the range [1..8];
 # each string in A consists of lowercase English letters;
 # the sum of lengths of strings in A does not exceed 100.
