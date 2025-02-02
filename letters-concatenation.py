@@ -21,3 +21,26 @@
 # each string in A consists of lowercase English letters;
 # the sum of lengths of strings in A does not exceed 100.
 # In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
+import re
+def solution(A):
+    N = len(A)
+    # print(N)
+    if N not in range(1,9):
+        return f"{N} should be in the range of 1-8"
+    total_length = sum(len(item) for item in A)
+    if total_length > 100:
+        return f"the sum of the length of the strigns in A exceeds 100. total length is {total_length}"
+    print(total_length)
+    valid = r'^[a-z]+$'
+    for item in A:
+        if not re.fullmatch(valid, item):
+            return f"{A} should only contain lowercase english letters"
+
+
+
+
+print(solution(["co", "dil", "ity"]))
+print(solution(["abc", "yyy", "def", "csv"]))
+print(solution(["potato", "kayak", "banana", "racecar"]))
+print(solution(["eva", "jqw", "tyn", "jan"]))
+
