@@ -16,28 +16,62 @@
 # Write an efficient algorithm for the following assumptions:
 # N is an integer within the range [3..100,000];
 # string S is made only of the characters '.' and/or 'X'.
-import re
 def solution(S):
     N = len(S)
-    # S = list(S)
-    group = []
-    count = 0
-    if N not in range(3, 100001):
-        return f"{N} should be in the range of 3 - 100,000"
-    valid = r'^[.X]+$'
-    if not re.match(valid, S):
-        return f"{S} should only contain characters '. and X characters"
-    for u in range(0, N, 3):
-        # print(u)
-        k = S[u: u+3]
-        # print(k)
-        group.append(k)
-    # print(group)
-    for i in group:
-        # print(i)
-        if 'X' in i:
-            count += 1
-    return count
+    # print(N)
+    patches = 0
+    for r in range(0, N, 3):
+        # print(r)
+        pairs = S[r: r+3]
+        # print(pairs)
+        if 'X' in pairs:
+            patches += 1
+    return patches
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import re
+# def solution(S):
+#     N = len(S)
+#     # S = list(S)
+#     group = []
+#     count = 0
+#     if N not in range(3, 100001):
+#         return f"{N} should be in the range of 3 - 100,000"
+#     valid = r'^[.X]+$'
+#     if not re.match(valid, S):
+#         return f"{S} should only contain characters '. and X characters"
+#     for u in range(0, N, 3):
+#         # print(u)
+#         k = S[u: u+3]
+#         # print(k)
+#         group.append(k)
+#     # print(group)
+#     for i in group:
+#         # print(i)
+#         if 'X' in i:
+#             count += 1
+#     return count
 
 
 
