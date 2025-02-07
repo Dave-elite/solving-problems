@@ -16,3 +16,15 @@
 # N is an integer within the range [4..100];
 # string S is made only of digits (0−9).
 # In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
+import re
+def solution(S):
+    N = len(S)
+    if not len in range(4, 101):
+        return f"{N}should be in the range of 4 - 100"
+    
+
+
+print(solution("43798"))
+print(solution("00101"))
+print(solution("0332331"))
+print(solution("00331"))
