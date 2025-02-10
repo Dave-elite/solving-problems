@@ -14,11 +14,25 @@
 import re
 def solution(S):
     N = len(S)
+    S = list(S)
     if N not in range(1, 1001):
         return f"{N} should be in the range of 1-1000"
     valid = r'^[a-z?]+$'
     if not re.match(valid, S):
         return f"{S} should only contain lowercase letters and question marks"
+    for i in range(N // 2):
+        print(i)
+        right = S[i]
+        left = S[N - i - 1]
+        print(left)
+    if right == '?' and left == '?':
+        S[i] = 'a'
+        S[N - i - 1] = 'a'
+    elif right == '?':
+        S[i] = S[N - i - 1]
+
+
+
     
 
 
