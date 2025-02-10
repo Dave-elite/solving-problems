@@ -17,40 +17,106 @@
 
 def solution(A, F, M):
     N = len(A)
-    if N not in range(1, 100001):
-        return f"{N}should be in the range 1 - 100,000"
-    if F not in range(1, 100001):
-        return f"{F} should be in the range of 1 - 100,000"
-    if M not in range(1, 7):
-        return f"{M} should be in the range of 1 - 7"
-    for i in A:
-        if i not in range(1, 7):
-            return f"{i} should be in the range of 1 - 6"
-        
-    total_rolls = M * (N + F)
-    known_total = sum(A)
-    # print(known_total)
-    forgortten_sum = total_rolls - known_total
-
-    if forgortten_sum < F and forgortten_sum < F * 6:
+    
+    # Calculate the total required sum of all rolls
+    total_required_sum = M * (N + F)
+    sum_of_known_rolls = sum(A)
+    
+    # Calculate the sum we need from the missing rolls
+    missing_sum = total_required_sum - sum_of_known_rolls
+    
+    # Check if it's possible to get the missing_sum with F rolls between 1 and 6
+    if missing_sum < F or missing_sum > 6 * F:
         return [0]
-
     
-
-    current_rolls = N * [1]
-    current_sum = F
-    # print(current_rolls)
-    remaining_sum = forgortten_sum - current_sum
-    # print(remaining_sum)
+    # Start with F rolls all set to 1
+    result = [1] * F
+    current_sum = F  # Since all are initialized to 1, the sum is F initially
     
+    # Now we need to reach the missing_sum, so we need to add (missing_sum - current_sum)
+    remaining_addition = missing_sum - current_sum
+    
+    # Distribute the remaining addition across the rolls
     for i in range(F):
-        add = min(5, remaining_sum)
-        current_rolls[i] += add
-        remaining_sum -= add
-        # print(remaining_sum)
-        if remaining_sum == 0:
+        # Add as much as possible to each roll (max is 5 because each roll is 1 initially)
+        add = min(5, remaining_addition)
+        result[i] += add
+        remaining_addition -= add
+        
+        # If we've distributed all the remaining addition, we can stop
+        if remaining_addition == 0:
             break
-    return current_rolls if remaining_sum == 0 else [0]
+    
+    # If we still have remaining addition to distribute, it's impossible
+    if remaining_addition > 0:
+        return [0]
+    
+    return result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A, F, M):
+#     N = len(A)
+#     if N not in range(1, 100001):
+#         return f"{N}should be in the range 1 - 100,000"
+#     if F not in range(1, 100001):
+#         return f"{F} should be in the range of 1 - 100,000"
+#     if M not in range(1, 7):
+#         return f"{M} should be in the range of 1 - 7"
+#     for i in A:
+#         if i not in range(1, 7):
+#             return f"{i} should be in the range of 1 - 6"
+        
+#     total_rolls = M * (N + F)
+#     known_total = sum(A)
+#     # print(known_total)
+#     forgortten_sum = total_rolls - known_total
+
+#     if forgortten_sum < F and forgortten_sum < F * 6:
+#         return [0]
+
+    
+
+#     current_rolls = N * [1]
+#     current_sum = F
+#     # print(current_rolls)
+#     remaining_sum = forgortten_sum - current_sum
+#     # print(remaining_sum)
+    
+#     for i in range(F):
+#         add = min(5, remaining_sum)
+#         current_rolls[i] += add
+#         remaining_sum -= add
+#         # print(remaining_sum)
+#         if remaining_sum == 0:
+#             break
+#     return current_rolls if remaining_sum == 0 else [0]
 
 
 
