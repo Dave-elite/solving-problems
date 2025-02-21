@@ -11,35 +11,83 @@
 # N is an integer within the range [1..1,000];
 # string S consists only of lowercases letters ('a' − 'z') or '?'.
 # In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
-import re
-def solution(S):
-    N = len(S)
-
-    s = list(S)
-    
-    if N not in range(1, 1001):
-        return f"{N} should be in the range of 1-1000"
-    valid = r'^[a-z?]+$'
-    if not re.match(valid, S):
-        return f"{S} should only contain lowercase letters and question marks"
+def solution(str):
+    N = len(str)
+    S = list(str)
+    # print(S)
     for i in range(N // 2):
-        # print(i)
-        left = s[i]
-        right = s[N - i - 1]
-        # print(left)
-        if right == '?' and left == '?':
-            s[i] = 'a'
-            s[N - i - 1] = 'a'
-        elif right == '?':
-            s[N - i - 1] = s[i]
+        left = S[i]
+        right = S[N - i - 1]
+        # print(right)
+        if left == '?' and right == '?':
+            S[i] = 'b'
+            S[N - i - 1] = 'b'
         elif left == '?':
-            s[i] = s[N - i - 1]
-
+            S[i] = S[N - i - 1]
+        elif right == '?':
+            S[N - i - 1] = S[i]
         elif right != left:
             return "NO"
-    if N % 2 == 1 and s[N // 2] == '?':
-        s[N // 2] == 'b'
-    return ''.join(s)
+    if N % 2 == 1 and S[N // 2] == '?':
+        S[N // 2] = 'b'
+    return ''.join(S)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import re
+# def solution(S):
+#     N = len(S)
+
+#     s = list(S)
+    
+#     if N not in range(1, 1001):
+#         return f"{N} should be in the range of 1-1000"
+#     valid = r'^[a-z?]+$'
+#     if not re.match(valid, S):
+#         return f"{S} should only contain lowercase letters and question marks"
+#     for i in range(N // 2):
+#         # print(i)
+#         left = s[i]
+#         right = s[N - i - 1]
+#         # print(left)
+#         if right == '?' and left == '?':
+#             s[i] = 'a'
+#             s[N - i - 1] = 'a'
+#         elif right == '?':
+#             s[N - i - 1] = s[i]
+#         elif left == '?':
+#             s[i] = s[N - i - 1]
+
+#         elif right != left:
+#             return "NO"
+#     if N % 2 == 1 and s[N // 2] == '?':
+#         s[N // 2] == 'b'
+#     return ''.join(s)
 
 
 

@@ -9,21 +9,50 @@
 # Input: 2
 # Output: 2
 
-def BracketCombinations(num):
-  
-  #if the num argument is 0 then this means there are no pairs of parenthesis to arrange.
-  #The only solid comninations is an empty string which count as 1 valid arrangemnent so we return 1
+def BracketCobmninations(num):
   if num == 0:
     return 1
+  count = 0
+
+  for i in range(num):
+    BracketCobmninations(i)
+    count += BracketCobmninations(i) * BracketCobmninations(num - i - 1)
+print(BracketCobmninations(input()))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def BracketCombinations(num):
+  
+#   #if the num argument is 0 then this means there are no pairs of parenthesis to arrange.
+#   #The only solid comninations is an empty string which count as 1 valid arrangemnent so we return 1
+#   if num == 0:
+#     return 1
   
 
-  count = 0
-  for i in range(num):
-    # print(BracketCombinations(i))
-    # print(BracketCombinations(num - 1 - i))
-    count += BracketCombinations(i) * BracketCombinations(num - 1 - i)
-  return count
+  # count = 0
+  # for i in range(num):
+  #   # print(BracketCombinations(i))
+  #   # print(BracketCombinations(num - 1 - i))
+  #   count += BracketCombinations(i) * BracketCombinations(num - 1 - i)
+  # return count
+
+
 
 
 # keep this function call here 
-print(BracketCombinations(input()))
+# print(BracketCombinations(input()))
