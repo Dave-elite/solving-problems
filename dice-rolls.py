@@ -14,44 +14,117 @@
 # N and F are integers within the range [1..100,000];
 # each element of array A is an integer within the range [1..6];
 # M is an integer within the range [1..6].
-
 def solution(A, F, M):
     N = len(A)
+    total_sum = M * (N + F)
+    known_sum = sum(A)
+    # print(known_sum)
+    forgotten_sum = total_sum - known_sum
     
-    # Calculate the total required sum of all rolls
-    total_required_sum = M * (N + F)
-    sum_of_known_rolls = sum(A)
-    
-    # Calculate the sum we need from the missing rolls
-    missing_sum = total_required_sum - sum_of_known_rolls
-    
-    # Check if it's possible to get the missing_sum with F rolls between 1 and 6
-    if missing_sum < F or missing_sum > 6 * F:
+    if forgotten_sum < F or forgotten_sum > F * 6:
         return [0]
-    
-    # Start with F rolls all set to 1
-    result = [1] * F
-    current_sum = F  # Since all are initialized to 1, the sum is F initially
-    
-    # Now we need to reach the missing_sum, so we need to add (missing_sum - current_sum)
-    remaining_addition = missing_sum - current_sum
-    
-    # Distribute the remaining addition across the rolls
+    #start by setting all f rolls to 1
+    result = F * [1]
+    #Since we have made each roll to be 1 above this means that F will be the sum of the rolls in result since all of them are one
+    current_sum = F
+    # print(result)
+    #the addition sum needed to reach the forgotten sum after initializing all rolls to 1
+    remaining_sum = forgotten_sum - current_sum
+    #the goal of this loop is to distribute the remaining_sum.Each roll must be between 1 and 6, so we need
+    # to ensure that we don't exceed these bounds while disturbing the sum
+    '''
+    We started by initializing all F missing rolls to 1. This is the minimum value a dice roll can take
+    Since all rolls are intialized to 1, the sum of these rolls is F.
+
+    '''
     for i in range(F):
-        # Add as much as possible to each roll (max is 5 because each roll is 1 initially)
-        add = min(5, remaining_addition)
+        # print(i)
+        #We can add atlears 5 to a roll because each roll is already 1, and the maximum value a roll can take 6.
+        #So, the maximum value a roll can take is 5. 
+        add = min(5, remaining_sum)
+        # if remaining_addition is less than 5 we add to the result list
         result[i] += add
-        remaining_addition -= add
-        
-        # If we've distributed all the remaining addition, we can stop
-        if remaining_addition == 0:
+        #after adding less the number antered from the remaining_sum
+        remaining_sum -= add
+        # print(result)
+        if remaining_sum == 0:
             break
-    
-    # If we still have remaining addition to distribute, it's impossible
-    if remaining_addition > 0:
+    #This checks whether the remaining_sum has been fully distributed across f missing dice_rolls
+    # if there is still some remaining_addition left after it across rolls it mrans it's impossible to acieve the required sum    
+    if remaining_sum > 0:
         return [0]
-    
+
     return result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A, F, M):
+#     N = len(A)
+    
+#     # Calculate the total required sum of all rolls
+#     total_required_sum = M * (N + F)
+#     sum_of_known_rolls = sum(A)
+    
+#     # Calculate the sum we need from the missing rolls
+#     missing_sum = total_required_sum - sum_of_known_rolls
+    
+#     # Check if it's possible to get the missing_sum with F rolls between 1 and 6
+#     if missing_sum < F or missing_sum > 6 * F:
+#         return [0]
+    
+#     # Start with F rolls all set to 1
+#     result = [1] * F
+#     current_sum = F  # Since all are initialized to 1, the sum is F initially
+    
+#     # Now we need to reach the missing_sum, so we need to add (missing_sum - current_sum)
+#     remaining_addition = missing_sum - current_sum
+    
+#     # Distribute the remaining addition across the rolls
+#     for i in range(F):
+#         # Add as much as possible to each roll (max is 5 because each roll is 1 initially)
+#         add = min(5, remaining_addition)
+#         result[i] += add
+#         remaining_addition -= add
+        
+#         # If we've distributed all the remaining addition, we can stop
+#         if remaining_addition == 0:
+#             break
+    
+#     # If we still have remaining addition to distribute, it's impossible
+#     if remaining_addition > 0:
+#         return [0]
+    
+#     return result
 
 
 
