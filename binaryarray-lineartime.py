@@ -14,9 +14,16 @@
 #     return arrange
 
 def solution(A):
+    
+    '''
+    counting how many zeros are there in the list also the zeros is a variable for the count of the zeros
+
+    '''
     zeros = A.count(0)
-    print(zeros)
+    #the variable k is initialized to 0. This variable will be used to keep track of the insed in the list 
+    
     k = 0
+    # print(zeros)
     while zeros:
         A[k] = 0
         zeros = zeros - 1
@@ -24,6 +31,43 @@ def solution(A):
     for k in range(k, len(A)):
         A[k] = 1
     print(A)
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(A):
+#     zeros = A.count(0)
+#     print(zeros)
+#     k = 0
+#     while zeros:
+#         A[k] = 0
+#         zeros = zeros - 1
+#         k = k + 1
+#     for k in range(k, len(A)):
+#         A[k] = 1
+#     print(A)
 
 
 
